@@ -1,23 +1,20 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, ThunkDispatch } from '@reduxjs/toolkit';
 
 import {
-  TypedUseSelectorHook,
   useDispatch as dispatchHook,
   useSelector as selectorHook
 } from 'react-redux';
 
-const rootReducer = () => {}; // Заменить на импорт настоящего редьюсера
+import { rootReducer } from './rootReducer';
 
-const store = configureStore({
+export const store = configureStore({
   reducer: rootReducer,
   devTools: process.env.NODE_ENV !== 'production'
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-export type AppDispatch = typeof store.dispatch;
+export type AppDispatch = ThunkDispatch<RootState, unknown, any>;
 
-export const useDispatch: () => AppDispatch = () => dispatchHook();
-export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
-
-export default store;
+export const useDispatch = dispatchHook.withTypes<AppDispatch>();
+export const useSelector = selectorHook.withTypes<RootState>();

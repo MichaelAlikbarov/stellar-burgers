@@ -6,13 +6,13 @@ export type TOrderData = {
   order: TOrder | null;
   isOrderStatus: boolean;
   userOrders: TOrder[];
-  orderByNumber: TOrder | null;
+  orderByNumber: TOrder[];
 };
 export const initialState: TOrderData = {
   order: null,
   isOrderStatus: false,
   userOrders: [],
-  orderByNumber: null
+  orderByNumber: []
 };
 
 export const orderSlice = createSlice({
@@ -43,7 +43,7 @@ export const orderSlice = createSlice({
         state.userOrders = action.payload;
       })
       .addCase(getOrderByNumber.fulfilled, (state, action) => {
-        state.orderByNumber = action.payload.orders[0];
+        state.orderByNumber = action.payload.orders;
       });
   }
 });

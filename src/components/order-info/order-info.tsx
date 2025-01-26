@@ -5,19 +5,19 @@ import { TIngredient, TOrder } from '@utils-types';
 import { useDispatch, useSelector } from '../../services/store';
 import { selectIngredients } from '../../services/ingredients/slice';
 import { useParams } from 'react-router-dom';
-import { getOrderByNumber } from '../../services/order/action';
-import { ordersSelector } from '../../services/feed/slice';
+import { getOrderByNumber, getOrders } from '../../services/order/action';
 import { orderByNumber } from '../../services/order/slice';
 
 export const OrderInfo: FC = () => {
-  const number = Number(useParams());
+  const { number } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getOrderByNumber(Number(number)));
   }, []);
 
-  const orderData = useSelector(orderByNumber);
+  const allOrders = useSelector(orderByNumber);
+  const orderData = allOrders.find((order) => order.number === Number(number));
   const ingredients: TIngredient[] = useSelector(selectIngredients);
 
   /* Готовим данные для отображения */

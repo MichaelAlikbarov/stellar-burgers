@@ -5,13 +5,13 @@ import { Preloader } from '@ui';
 
 type TProtectedRouteProps = {
   onlyUnAuth?: boolean;
-  component: JSX.Element;
+  component: React.ReactElement;
 };
 
 const ProtectedRouter = ({
   onlyUnAuth = false,
   component
-}: TProtectedRouteProps): JSX.Element => {
+}: TProtectedRouteProps): React.ReactElement => {
   const user = useSelector(getUser);
   const isAuthChecked = useSelector(getIsAuthChecked);
   const location = useLocation();
@@ -34,5 +34,5 @@ export const OnlyAuth = ProtectedRouter;
 export const OnlyUnAuth = ({
   component
 }: {
-  component: React.JSX.Element;
-}): React.JSX.Element => <ProtectedRouter onlyUnAuth component={component} />;
+  component: React.ReactElement;
+}): React.ReactElement => <ProtectedRouter onlyUnAuth component={component} />;

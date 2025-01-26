@@ -33,13 +33,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(checkUserAuth());
-  }, []);
-
-  useEffect(() => {
     dispatch(getIngredients());
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch(getFeeds());
   }, [dispatch]);
 

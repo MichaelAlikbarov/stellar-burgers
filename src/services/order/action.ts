@@ -5,7 +5,11 @@ import { useDispatch } from '../store';
 
 export const newOrder = createAsyncThunk(
   'order/postOrder',
-  async (orderData: string[]) => await orderBurgerApi(orderData)
+  async (orderData: string[], { dispatch }) => {
+    const res = await orderBurgerApi(orderData);
+    dispatch(resetConstructor());
+    return res;
+  }
 );
 
 export const getOrderByNumber = createAsyncThunk(

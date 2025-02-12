@@ -2,6 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TOrdersData } from '@utils-types';
 import { getFeeds } from './action';
 
+export type TOrdersDataStatus = {
+  success: boolean;
+};
+
 export const initialState: TOrdersData = {
   orders: [],
   total: 0,

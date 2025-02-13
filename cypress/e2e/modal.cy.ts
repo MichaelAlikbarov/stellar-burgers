@@ -7,11 +7,13 @@ describe('check the work of modal windows', () => {
   });
 
   it('opening the ingredient modal window', () => {
-    cy.getByData('main-ingredient').find('li').first().click();
+    cy.get('#modals').find('div').should('not.exist');
+    cy.getByData('main-ingredient')
+      .contains('Филе Люминесцентного тетраодонтимформа')
+      .click();
     cy.get('#modals')
-      .find('h3')
-      .first()
-      .should('have.text', 'Детали ингридиента');
+      .contains('Филе Люминесцентного тетраодонтимформа')
+      .should('exist');
   });
 
   it('closing by clicking on the cross', () => {

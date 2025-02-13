@@ -8,6 +8,7 @@ describe('get ingredient data', () => {
 
   it('add ingredients from the list to the constructor', () => {
     cy.wait('@getIngredients');
+    cy.getByData('ingredientItem').should('not.exist');
 
     cy.getByData('bun-ingredient').contains('Добавить').click();
     cy.getByData('bun-list').should('exist');

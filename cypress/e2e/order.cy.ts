@@ -1,3 +1,5 @@
+import { contains } from "cypress/types/lodash/fp";
+
 describe('create an order', () => {
   beforeEach(() => {
     cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' }).as(
@@ -16,11 +18,17 @@ describe('create an order', () => {
     cy.visit('http://localhost:4000/');
   });
 
+  afterEach(() => {
+    cy.clearLocalStorage('refreshToken');
+    cy.clearCookie('accessToken');
+  });
+
   it('make an order, close order modal and reset constructor', () => {
     cy.getByData('bun-ingredient').contains('Добавить').click();
     cy.getByData('main-ingredient').contains('Добавить').click();
     cy.getByData('sauce-ingredient').contains('Добавить').click();
     cy.wait('@signup');
+    cy.get('#modals').find('div').should('not.exist');
     cy.contains('Оформить заказ').click();
     cy.wait('@postOrder')
       .its('request.body')
@@ -32,6 +40,7 @@ describe('create an order', () => {
           '643d69a5c3f7b9001cfa093c'
         ]
       });
+
     cy.get('#modals').contains('123456').should('exist');
     cy.get('#modals').find('button').click();
     cy.contains('идентификатор заказа').should('not.exist');

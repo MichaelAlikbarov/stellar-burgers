@@ -1,7 +1,6 @@
 import { getOrderByNumberApi, getOrdersApi, orderBurgerApi } from '@api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { resetConstructor } from '../burgerConstructor/slice';
-import { useDispatch } from '../store';
 
 export const newOrder = createAsyncThunk(
   'order/postOrder',

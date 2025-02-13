@@ -19,7 +19,6 @@ import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { checkUserAuth } from '../../services/user/action';
 import { getIngredients } from '../../services/ingredients/action';
-import { getFeeds } from '../../services/feed/action';
 
 const App = () => {
   const location = useLocation();
@@ -34,7 +33,6 @@ const App = () => {
   useEffect(() => {
     dispatch(checkUserAuth());
     dispatch(getIngredients());
-    dispatch(getFeeds());
   }, [dispatch]);
 
   return (
